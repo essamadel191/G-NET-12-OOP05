@@ -1,6 +1,6 @@
 ﻿namespace G_NET_12_OOP05.TicketBookingSystem
 {
-    internal struct SeatLocation
+    public struct SeatLocation
     {
         public char Row { get; set; }
         public int Number { get; set; }
@@ -12,7 +12,7 @@
         }
         public override string ToString()
         {
-            return $"{Row}-{Number}";
+            return $"{Row}{Number}";
         }
     }
 }

@@ -1,23 +1,19 @@
 namespace G_NET_12_OOP05.TicketBookingSystem
 {
-    internal class StandardTicket : Ticket
+    public class StandardTicket : Ticket
     {
         public SeatLocation Seat { get; set; }
 
-        public StandardTicket(string movieName, decimal price, SeatLocation seat) : base(movieName, price)
-        {
-            Seat = seat;
-        }
+        public StandardTicket(string movieName, decimal price, SeatLocation seat) : base(movieName, price) => Seat = seat;
 
         public override void PrintTicket()
         {
-            base.PrintTicket();
-            Console.WriteLine($"  Seat: {Seat}");
+            Console.WriteLine($"[Ticket #{TicketId}] {MovieName} | Standard | Seat: {Seat} | Price: {Price} | After Tax: {PriceAfterTax:0.##} | Booked: {(IsBooked ? "Yes" : "No")}");
         }
 
         public override string ToString()
         {
-            return $"{base.ToString()} | Seat: {Seat}";
+            return $"[Ticket #{TicketId}] {MovieName} | Standard | Seat: {Seat} | Price: {Price} | After Tax: {PriceAfterTax:0.##} | Booked: {(IsBooked ? "Yes" : "No")}";
         }
     }
 }

@@ -1,6 +1,8 @@
+using G_NET_12_OOP05.TicketBookingSystem.Interfaces;
+
 namespace G_NET_12_OOP05.TicketBookingSystem
 {
-    internal class Ticket
+    public class Ticket : IPrinting, IBookable
     {
         private static int _totalTickets = 0;
 
@@ -8,6 +10,7 @@ namespace G_NET_12_OOP05.TicketBookingSystem
         public string MovieName { get; set; }
         public decimal Price { get; protected set; }
         public decimal PriceAfterTax => Price * 1.14m;
+        public bool IsBooked { get; private set; }
 
         public Ticket(string movieName, decimal price)
         {
@@ -16,7 +19,6 @@ namespace G_NET_12_OOP05.TicketBookingSystem
                 Console.WriteLine("Price must be greater than 0.");
                 return;
             }
-                
 
             _totalTickets++;
             TicketId = _totalTickets;
@@ -31,9 +33,8 @@ namespace G_NET_12_OOP05.TicketBookingSystem
             if (price <= 0)
             {
                 Console.WriteLine("Price must be greater than 0.");
-                return ;
+                return;
             }
-                
             Price = price;
         }
 
@@ -44,18 +45,37 @@ namespace G_NET_12_OOP05.TicketBookingSystem
                 Console.WriteLine("Base price and multiplier must be greater than 0.");
                 return;
             }
-                
             Price = basePrice * multiplier;
+        }
+
+        public void Book()
+        {
+            if (IsBooked)
+            {
+                Console.WriteLine($"Ticket #{TicketId} is already booked.");
+                return;
+            }
+            IsBooked = true;
+        }
+
+        public void Cancel()
+        {
+            if (!IsBooked)
+            {
+                Console.WriteLine($"Ticket #{TicketId} is not booked.");
+                return;
+            }
+            IsBooked = false;
         }
 
         public virtual void PrintTicket()
         {
-            Console.WriteLine($"Ticket #{TicketId} | {MovieName} | Price: {Price} EGP | After Tax: {PriceAfterTax:F2} EGP");
+            Console.WriteLine($"[Ticket #{TicketId}] {MovieName} | Price: {Price} | After Tax: {PriceAfterTax:0.##} | Booked: {(IsBooked ? "Yes" : "No")}");
         }
 
         public override string ToString()
         {
-            return $"Ticket #{TicketId} | {MovieName} | Price: {Price} EGP | After Tax: {PriceAfterTax} EGP";
+            return $"[Ticket #{TicketId}] {MovieName} | Price: {Price} | After Tax: {PriceAfterTax:0.##} | Booked: {(IsBooked ? "Yes" : "No")}";
         }
     }
 }

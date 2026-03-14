@@ -48,6 +48,51 @@
 
 #region Part 02
 
+using G_NET_12_OOP05.TicketBookingSystem;
+using G_NET_12_OOP05.TicketBookingSystem.Interfaces;
 
+// a.
+Cinema cinema = new Cinema("Star Cinema");
+cinema.OpenCinema();
+Console.WriteLine();
+
+// b. 
+StandardTicket standard = new StandardTicket("Inception", 80, new SeatLocation('A', 5));
+VIPTicket vip = new VIPTicket("Avengers", 200, true);
+IMAXTicket imax = new IMAXTicket("Dune", 100, true); 
+
+standard.Book();
+vip.Book();
+imax.Book();
+
+cinema.AddTicket(standard);
+cinema.AddTicket(vip);
+cinema.AddTicket(imax);
+
+// c. 
+cinema.PrintAllTickets();
+Console.WriteLine();
+
+// d. 
+VIPTicket vipClone = (VIPTicket)vip.Clone();
+vipClone.MovieName = "Interstellar";
+
+Console.WriteLine("--- Clone Test ---");
+Console.WriteLine("Original : " + vip.ToString());
+Console.WriteLine("Clone    : " + vipClone.ToString());
+Console.WriteLine();
+
+// e. 
+standard.Cancel();
+Console.WriteLine("--- After Cancellation ---");
+standard.PrintTicket();
+Console.WriteLine();
+
+// f. 
+BookingHelper.PrintAll(new IPrinting[] { standard, vip, imax });
+Console.WriteLine();
+
+// g. 
+cinema.CloseCinema();
 
 #endregion

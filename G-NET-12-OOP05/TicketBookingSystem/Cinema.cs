@@ -1,3 +1,5 @@
+using G_NET_12_OOP05.TicketBookingSystem.Interfaces;
+
 namespace G_NET_12_OOP05.TicketBookingSystem
 {
     internal class Cinema
@@ -13,13 +15,13 @@ namespace G_NET_12_OOP05.TicketBookingSystem
 
         public void OpenCinema()
         {
-            Console.WriteLine("========== Cinema Opened ==========");
+            Console.WriteLine("=== Cinema Opened ===");
             _projector.Start();
         }
 
         public void CloseCinema()
         {
-            Console.WriteLine("========== Cinema Closed ==========");
+            Console.WriteLine("=== Cinema Closed ===");
             _projector.Stop();
         }
 
@@ -38,17 +40,17 @@ namespace G_NET_12_OOP05.TicketBookingSystem
 
         public void PrintAllTickets()
         {
-            Console.WriteLine("========== All Tickets ==========");
+            Console.WriteLine("--- All Tickets ---");
             foreach (Ticket ticket in _tickets)
             {
                 if (ticket != null)
-                    ticket.PrintTicket();
+                    ((IPrinting)ticket).PrintTicket();
             }
         }
 
         public static void ProcessTicket(Ticket t)
         {
-            t.PrintTicket();
+            ((IPrinting)t).PrintTicket();
         }
     }
 }

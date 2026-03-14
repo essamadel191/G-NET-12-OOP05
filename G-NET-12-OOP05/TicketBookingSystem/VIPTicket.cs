@@ -1,6 +1,6 @@
 namespace G_NET_12_OOP05.TicketBookingSystem
 {
-    internal class VIPTicket : Ticket
+    public class VIPTicket : Ticket, ICloneable
     {
         public bool LoungeAccess { get; set; }
         public decimal ServiceFee { get; } = 50;
@@ -12,13 +12,17 @@ namespace G_NET_12_OOP05.TicketBookingSystem
 
         public override void PrintTicket()
         {
-            base.PrintTicket();
-            Console.WriteLine($"  Lounge: {(LoungeAccess ? "Yes" : "No")} | Service Fee: {ServiceFee} EGP");
+            Console.WriteLine($"[Ticket #{TicketId}] {MovieName} | VIP | Lounge: {(LoungeAccess ? "Yes" : "No")} | Fee: {ServiceFee} | Price: {Price} | After Tax: {PriceAfterTax:0.##} | Booked: {(IsBooked ? "Yes" : "No")}");
+        }
+
+        public object Clone()
+        {
+            return new VIPTicket(MovieName, Price, LoungeAccess);
         }
 
         public override string ToString()
         {
-            return $"{base.ToString()} | Lounge: {(LoungeAccess ? "Yes" : "No")} | Service Fee: {ServiceFee} EGP";
+            return $"[Ticket #{TicketId}] {MovieName} | VIP | Lounge: {(LoungeAccess ? "Yes" : "No")} | Fee: {ServiceFee} | Price: {Price} | After Tax: {PriceAfterTax:0.##} | Booked: {(IsBooked ? "Yes" : "No")}";
         }
     }
 }

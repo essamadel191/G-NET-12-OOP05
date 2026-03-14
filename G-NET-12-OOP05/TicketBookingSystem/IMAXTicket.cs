@@ -1,6 +1,6 @@
 namespace G_NET_12_OOP05.TicketBookingSystem
 {
-    internal class IMAXTicket : Ticket
+    public class IMAXTicket : Ticket
     {
         public bool Is3D { get; set; }
 
@@ -11,13 +11,12 @@ namespace G_NET_12_OOP05.TicketBookingSystem
 
         public override void PrintTicket()
         {
-            base.PrintTicket();
-            Console.WriteLine($"  IMAX 3D: {(Is3D ? "Yes" : "No")}");
+            Console.WriteLine($"[Ticket #{TicketId}] {MovieName} | IMAX | 3D: {(Is3D ? "Yes" : "No")} | Price: {Price} | After Tax: {PriceAfterTax:0.##} | Booked: {(IsBooked ? "Yes" : "No")}");
         }
 
         public override string ToString()
         {
-            return $"{base.ToString()} | IMAX 3D: {(Is3D ? "Yes" : "No")}";
+            return $"[Ticket #{TicketId}] {MovieName} | IMAX | 3D: {(Is3D ? "Yes" : "No")} | Price: {Price} | After Tax: {PriceAfterTax:0.##} | Booked: {(IsBooked ? "Yes" : "No")}";
         }
     }
 }
